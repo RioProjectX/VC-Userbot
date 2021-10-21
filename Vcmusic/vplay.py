@@ -2,7 +2,7 @@ import os
 import re
 import asyncio
 from pyrogram import Client
-from VCBot.queues import QUEUE, add_to_queue
+from Vcmusic.queues import QUEUE, add_to_queue
 from config import bot, call_py, HNDLR, contact_filter
 from pyrogram import filters
 from pyrogram.types import Message
@@ -92,7 +92,7 @@ async def vplay(client, m: Message):
                stream_type=StreamType().pulse_stream,
             )
             add_to_queue(chat_id, songname, dl, link, "Video", Q)
-            await huehue.edit(f"**Started Playing Video ▶** \n**🏷️ Name** : [{songname}]({link}) \n**☁️ Chat ID** : `{chat_id}`", disable_web_page_preview=True)
+            await huehue.edit(f"**Started Playing Video ▶** \n**🏷️ Name** : [{songname}]({link}) \n**💭 Chat ID** : `{chat_id}`", disable_web_page_preview=True)
       else:
          if len(m.command) < 2:
             await m.reply("💡 **Reply to an Audio File or give something to Search**")
@@ -126,7 +126,7 @@ async def vplay(client, m: Message):
                            stream_type=StreamType().pulse_stream,
                         )
                         add_to_queue(chat_id, songname, ytlink, url, "Video", Q)
-                        await huehue.edit(f"**Started Playing Video ▶** \n**🏷️ Name** : [{songname}]({url}) \n**☁️ Chat ID** : `{chat_id}`", disable_web_page_preview=True)
+                        await huehue.edit(f"**Started Playing Video ▶** \n**🏷️ Name** : [{songname}]({url}) \n**💭 Chat ID** : `{chat_id}`", disable_web_page_preview=True)
                      except Exception as ep:
                         await huehue.edit(f"`{ep}`")
             
@@ -163,7 +163,7 @@ async def vplay(client, m: Message):
                            stream_type=StreamType().pulse_stream,
                         )
                         add_to_queue(chat_id, songname, ytlink, url, "Video", Q)
-                        await huehue.edit(f"**Started Playing Video ▶** \n**🏷️ Name** : [{songname}]({url}) \n**☁️ Chat ID** : `{chat_id}`", disable_web_page_preview=True)
+                        await huehue.edit(f"**Started Playing Video ▶** \n**🏷️ Name** : [{songname}]({url}) \n**💭 Chat ID** : `{chat_id}`", disable_web_page_preview=True)
                      except Exception as ep:
                         await huehue.edit(f"`{ep}`")
 
