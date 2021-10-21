@@ -1,4 +1,3 @@
-
 import os
 import re
 import asyncio
@@ -111,7 +110,7 @@ async def play(client, m: Message):
             
    else:
          if len(m.command) < 2:
-            await m.reply("`Reply to an Audio File or give something to Search`")
+            await m.reply("💡 Reply to an Audio File or give something to Search")
          else:
             huehue = await m.reply("🔎 Searching")
             query = m.text.split(None, 1)[1]
