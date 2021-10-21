@@ -53,5 +53,5 @@ async def help(client, m: Message):
 
 @Client.on_message(filters.command(['repo'], prefixes=f"{HNDLR}"))
 async def help(client, m: Message):
-   KONTOL = f"🌐 **Source code**\n• **Github :** [Vcmusic-Userbot](https://github.com/KennedyProject/Vcmusic-Userbot)\n• **General Public License 3.0**", disable_web_page_preview=True
-   await m.reply(KONTOL)
+   KONTOL = f"🌐 **Source code**\n• **Github :** [Vcmusic-Userbot](https://github.com/KennedyProject/Vcmusic-Userbot)\n• **General Public License 3.0**"
+   await m.reply(KONTOL, disable_web_page_preview=True)
