@@ -52,7 +52,7 @@ async def play(client, m: Message):
    chat_id = m.chat.id
    if replied:
       if replied.audio or replied.voice:
-         huehue = await replied.reply("📥 `Downloading your song`")
+         huehue = await replied.reply("📥 **Downloading your song**")
          dl = await replied.download()
          link = replied.link
          if replied.audio:
@@ -77,13 +77,13 @@ async def play(client, m: Message):
             await huehue.edit(f"**🏷️ Name** : [{songname}]({link}) \n💡 **Status :** `Playing`\n\n**💭 Chat ID** : `{chat_id}`", disable_web_page_preview=True)
       else:
          if len(m.command) < 2:
-            await m.reply("📣 `Reply to an Audio File or give something to Search`")
+            await m.reply("📣 **Reply to an Audio File or give something to Search**")
          else:
-            huehue = await m.reply("`Searching...`")
+            huehue = await m.reply("📥 **Downloading your song**")
             query = m.text.split(None, 1)[1]
             search = ytsearch(query)
             if search==0:
-               await huehue.edit("`Found Nothing for the Given Query`")
+               await huehue.edit("❌ **Found Nothing for the Given Query**")
             else:
                songname = search[0]
                url = search[1]
@@ -112,7 +112,7 @@ async def play(client, m: Message):
          if len(m.command) < 2:
             await m.reply("`Reply to an Audio File or give something to Search`")
          else:
-            huehue = await m.reply("`Searching...`")
+            huehue = await m.reply("📥 **Downloading your song**")
             query = m.text.split(None, 1)[1]
             search = ytsearch(query)
             if search==0:
