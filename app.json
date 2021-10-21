@@ -1,0 +1,46 @@
+{
+    "name": "Vcmusic-Userbot",
+    "description": "A Simple Telegram Userbot to play Songs in Voice Chat",
+    "logo": "https://telegra.ph/file/1e227b2f1cac607fa6763.jpg",
+    "keywords": [
+        "Telegram",
+        "Vcmusic",
+        "MusicPlayer"
+    ],
+    "repository": "https://github.com/KennedyProject/Vcmusic-Userbot",
+    "env": {
+        "SESSION": {
+            "description": "Pyrogram String Session from replit.com",
+            "required": true
+        },
+        "API_ID": {
+            "description": "get it from my.telegram.org",
+            "required": true
+        },
+        "API_HASH": {
+            "description": "get it from my.telegram.org",
+            "required": true
+        },
+        "HNDLR": {
+            "description": "Your handler for play etc. The default handler is (!)",
+            "value": "!",
+            "required": false
+        }
+    },
+    "addons": [],
+    "buildpacks": [
+        {
+            "url": "heroku/python"
+        },
+        {
+            "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
+        }
+    ],
+    "formation": {
+        "worker": {
+            "quantity": 1,
+            "size": "free"
+        }
+    },
+    "stack": "container"
+}
