@@ -5,6 +5,7 @@ from pyrogram import Client
 from Vcmusic.queues import QUEUE, add_to_queue
 from config import bot, call_py, HNDLR, contact_filter
 from pyrogram import filters
+from yt_dlp import YoutubeDL
 from pyrogram.types import Message
 from pytgcalls import StreamType
 from pytgcalls.types.input_stream import AudioPiped
@@ -30,7 +31,7 @@ def ytsearch(query):
 # https://github.com/pytgcalls/pytgcalls/blob/dev/example/youtube_dl/youtube_dl_example.py
 async def ytdl(link):
    proc = await asyncio.create_subprocess_exec(
-       'youtube-dl',
+       'yt-dlp',
        '-g',
        '-f',
        # CHANGE THIS BASED ON WHAT YOU WANT
