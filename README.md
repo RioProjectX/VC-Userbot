@@ -51,7 +51,7 @@ python3 main.py
 ## Environment Variables
 - `API_ID`
 - `API_HASH`
-- `SESSION` - A Pyrogram String Session. Get one from [Here](https://replit.com/@dashezup/generate-pyrogram-session-string)
+- `SESSION` - A Pyrogram String Session. Get one from [Here](https://replit.com/@KennedyProject/String-Session)
 - `HNDLR` - Your Userbot Handler (Default is !)
 
 
