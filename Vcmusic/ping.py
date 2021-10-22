@@ -39,25 +39,10 @@ async def ping(client, m: Message):
    uptime = await _human_time_duration(int(uptime_sec))
    await m_reply.edit(f"🏓 `Pong!!`\n**Speed -** `{delta_ping * 1000:.3f} ms` \n**Uptime** - `{uptime}`")
 
-@Client.on_message(contact_filter & filters.command(['restart'], prefixes=f"{HNDLR}"))
-async def restart(client, m: Message):
-   await m.reply("`Restarting...`")
-   os.execl(sys.executable, sys.executable, *sys.argv)
-   # You probably don't need it but whatever
-   quit()
-
 @Client.on_message(contact_filter & filters.command(['help'], prefixes=f"{HNDLR}"))
 async def help(client, m: Message):
    HELP = f"**💡 Help menu** \n\n__👥 All Users command__ (Anyone can Use): \n• `{HNDLR}play` \n• `{HNDLR}vplay` \n• `{HNDLR}stream` (For Radio links) \n• `{HNDLR}vstream` (For .m3u8 / live links) \n• `{HNDLR}playfrom [channel] ; [n]` - Plays last n songs from channel \n• `{HNDLR}playlist` / `{HNDLR}queue` \n• `{HNDLR}repo \n\n__👮 Sudo users command__ (Can only be accessed by You and Your Contacts): \n• `{HNDLR}ping` \n• `{HNDLR}skip` \n• `{HNDLR}pause` and `{HNDLR}resume` \n• `{HNDLR}stop` / `{HNDLR}end` \n• `{HNDLR}help`"
    await m.reply(HELP)
-
-@Client.on_message(contact_filter & filters.command(['p'], prefixes=f"{HNDLR}"))
-async def asa(client, m: Message):
-   await m.edit("`Assalamualaikum wr.rb`")
-
-@Client.on_message(contact_filter & filters.command(['l'], prefixes=f"{HNDLR}"))
-async def wasa(client, m: Message):
-   await m.edit("`Waalaikumussalam wr.rb`")
 
 @Client.on_message(filters.command(['repo'], prefixes=f"{HNDLR}"))
 async def repo(client, m: Message):
