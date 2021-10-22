@@ -33,11 +33,11 @@ async def _human_time_duration(seconds):
 async def ping(client, m: Message):
    start = time()
    current_time = datetime.utcnow()
-   m_reply = await m.reply_text("`Pinging...`")
+   m_reply = await m.reply_text("`Ping...`")
    delta_ping = time() - start
    uptime_sec = (current_time - START_TIME).total_seconds()
    uptime = await _human_time_duration(int(uptime_sec))
-   await m_reply.edit(f"**Pong !!**`{delta_ping * 1000:.3f} ms` \n**Uptime** - `{uptime}`")
+   await m_reply.edit(f"🏓 **Pong!!**\n\n**Speed -** `{delta_ping * 1000:.3f} ms` \n**Uptime** - `{uptime}`")
 
 @Client.on_message(contact_filter & filters.command(['restart'], prefixes=f"{HNDLR}"))
 async def restart(client, m: Message):
