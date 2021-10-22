@@ -52,7 +52,7 @@ async def play(client, m: Message):
    chat_id = m.chat.id
    if replied:
       if replied.audio or replied.voice:
-         huehue = await replied.reply("📥 Downloading")
+         huehue = await replied.edit("📥 Downloading")
          dl = await replied.download()
          link = replied.link
          if replied.audio:
@@ -77,9 +77,9 @@ async def play(client, m: Message):
             await huehue.edit(f"**Started Playing Audio ▶** \n**🏷️ Title** : [{songname}]({link}) \n**💭 Chat ID** : `{chat_id}`", disable_web_page_preview=True)
       else:
          if len(m.command) < 2:
-            await m.reply("💡 Reply to an Audio File or give something to Search")
+            await m.edit("💡 Reply to an Audio File or give something to Search")
          else:
-            huehue = await m.reply("🔎 Searching")
+            huehue = await m.edit("🔎 Searching")
             query = m.text.split(None, 1)[1]
             search = ytsearch(query)
             if search==0:
@@ -110,9 +110,9 @@ async def play(client, m: Message):
             
    else:
          if len(m.command) < 2:
-            await m.reply("💡 Reply to an Audio File or give something to Search")
+            await m.edit("💡 Reply to an Audio File or give something to Search")
          else:
-            huehue = await m.reply("🔎 Searching")
+            huehue = await m.edit("🔎 Searching")
             query = m.text.split(None, 1)[1]
             search = ytsearch(query)
             if search==0:
@@ -145,10 +145,10 @@ async def play(client, m: Message):
 async def stream(client, m: Message):
    chat_id = m.chat.id
    if len(m.command) < 2:
-      await m.reply("💡 Give A Link/LiveLink/.m3u8 URL/YTLink to Play Audio from")
+      await m.edit("💡 Give A Link/LiveLink/.m3u8 URL/YTLink to Play Audio from")
    else: 
       link = m.text.split(None, 1)[1]
-      huehue = await m.reply("Trying to Play 📻")
+      huehue = await m.edit("Trying to Play 📻")
 
       # Filtering out YouTube URL's
       regex = r"^(https?\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+"
