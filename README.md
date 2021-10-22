@@ -62,5 +62,6 @@ python3 main.py
 
 
 ## Credits 💭
+- [KennedyProject](https://github.com/KennedyProject) The Owner
 - [Dan](https://github.com/delivrance) for [Pyrogram](https://github.com/pyrogram/pyrogram)
 - [Laky](https://github.com/Laky-64) for [PyTgCalls](https://github.com/pytgcalls/pytgcalls)
