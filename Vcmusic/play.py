@@ -55,7 +55,6 @@ async def ytdl(link):
 
 @Client.on_message(filters.command(['play'], prefixes=f"{HNDLR}"))
 async def play(client, m: Message):
-   eor = eor
    replied = m.reply_to_message
    chat_id = m.chat.id
    if replied:
