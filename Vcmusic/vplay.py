@@ -1,7 +1,6 @@
 import os
 import re
 import asyncio
-from yt_dlp import YoutubeDL
 from pyrogram import Client
 from Vcmusic.queues import QUEUE, add_to_queue
 from config import bot, call_py, HNDLR, contact_filter
@@ -114,7 +113,7 @@ async def vplay(client, m: Message):
                else:
                   if chat_id in QUEUE:
                      pos = add_to_queue(chat_id, songname, ytlink, url, "Video", Q)
-                     await huehue.edit(f"Queued at **#{pos}**")
+                     await huehue.edit(f"Queued at **{pos}**")
                   else:
                      try:
                         await call_py.join_group_call(
