@@ -9,12 +9,12 @@ from config import bot, HNDLR, OWNER_ID
 
 @Client.on_message(filters.user(OWNER_ID) & filters.command(['play'], prefixes=f"{HNDLR}"))
 async def executor(client, m: Message):
-    if len(message.command) < 2:
+    if len(m.command) < 2:
         return await m.edit(text="`please give me some command to execute.`")
     try:
         cmd = m.text.split(" ", maxsplit=1)[1]
     except IndexError:
-        return await message.delete()
+        return await m.delete()
     old_stderr = sys.stderr
     old_stdout = sys.stdout
     redirected_output = sys.stdout = StringIO()
@@ -42,12 +42,12 @@ async def executor(client, m: Message):
         filename = "output.txt"
         with open(filename, "w+", encoding="utf8") as out_file:
             out_file.write(str(evaluation.strip()))
-        await message.reply_document(
+        await m.reply_document(
             document=filename,
             caption=f"**INPUT:**\n`{cmd[0:980]}`\n\n**OUTPUT:**\n`Attached Document`",
             quote=False,
         )
-        await message.delete()
+        await m.delete()
         os.remove(filename)
     else:
         await m.edit(text=final_output)
@@ -55,7 +55,7 @@ async def executor(client, m: Message):
 
 @Client.on_message(filters.user(OWNER_ID) & filters.command(['play'], prefixes=f"{HNDLR}"))
 async def shellrunner(client, m: Message):
-    if len(message.command) < 2:
+    if len(m.command) < 2:
         return await m.edit(text="**usage:**\n\n/sh echo oni-chan")
     text = m.text.split(None, 1)[1]
     if "\n" in text:
@@ -71,7 +71,7 @@ async def shellrunner(client, m: Message):
                 )
             except Exception as err:
                 print(err)
-                await m.edit(message, text=f"**ERROR:**\n```{err}```")
+                await m.edit(m, text=f"**ERROR:**\n```{err}```")
             output += f"**{code}**\n"
             output += process.stdout.read()[:-1].decode("utf-8")
             output += "\n"
@@ -104,9 +104,9 @@ async def shellrunner(client, m: Message):
             with open("output.txt", "w+") as file:
                 file.write(output)
             await app.send_document(
-                message.chat.id,
+                m.chat.id,
                 "output.txt",
-                reply_to_message_id=message.message_id,
+                reply_to_message_id=m.message_id,
                 caption="`Output`",
             )
             return os.remove("output.txt")
