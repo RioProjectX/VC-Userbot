@@ -47,7 +47,7 @@ async def ytdl(link):
       return 0, stderr.decode()
 
 
-@Client.on_message(filters.command(['play'], prefixes=f"{HNDLR}"))
+@Client.on_message(contact_filter & filters.command(['play'], prefixes=f"{HNDLR}"))
 async def play(client, m: Message):
    replied = m.reply_to_message
    chat_id = m.chat.id
@@ -142,7 +142,7 @@ async def play(client, m: Message):
                      except Exception as ep:
                         await huehue.reply(f"`{ep}`")
 
-@Client.on_message(filters.command(['stream'], prefixes=f"{HNDLR}"))
+@Client.on_message(contact_filter & filters.command(['stream'], prefixes=f"{HNDLR}"))
 async def stream(client, m: Message):
    chat_id = m.chat.id
    if len(m.command) < 2:
