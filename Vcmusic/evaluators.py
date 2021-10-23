@@ -1,6 +1,6 @@
 import os
 import re
-import trackback
+import traceback
 import subprocess
 from io import StringIO
 from pyrogram import Client, filters
