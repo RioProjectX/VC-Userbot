@@ -34,7 +34,7 @@ async def _human_time_duration(seconds):
 async def ping(client, m: Message):
    start = time()
    current_time = datetime.utcnow()
-   m_reply = await m.reply_text("`Ping...`")
+   m_reply = await m.reply_text("`Pinging...`")
    delta_ping = time() - start
    await m_reply.edit("**0% ▒▒▒▒▒▒▒▒▒▒**")
    await m_reply.edit("**20% ██▒▒▒▒▒▒▒▒**")
@@ -42,7 +42,7 @@ async def ping(client, m: Message):
    await m_reply.edit("**60% ██████▒▒▒▒**")
    await m_reply.edit("**80% ████████▒▒**")
    await m_reply.edit("**100% ██████████**")
-   await asyncio.sleep(2)
+   await asyncio.sleep(1)
    end = datetime.now()
    uptime_sec = (current_time - START_TIME).total_seconds()
    uptime = await _human_time_duration(int(uptime_sec))
@@ -55,5 +55,5 @@ async def help(client, m: Message):
 
 @Client.on_message(filters.command(['repo'], prefixes=f"{HNDLR}"))
 async def repo(client, m: Message):
-   KONTOL = f"⚙️ **Source code**\n• **😼 Github :** [Vcmusic-Userbot](https://github.com/KennedyProject/Vcmusic-Userbot)\n• 🗂️ **General Public License 3.0**"
+   KONTOL = f"⚙️ **Source code**\n• **😼 Github :** [Vcmusic-Userbot](https://github.com/KennedyProject/Vcmusic-Userbot)\n• 🗂️ **GPL - 3.0 License**"
    await m.reply(KONTOL, disable_web_page_preview=True)
