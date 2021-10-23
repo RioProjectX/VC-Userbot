@@ -8,7 +8,7 @@ from pyrogram.types import Message
 from pytgcalls import StreamType
 from pytgcalls.types.input_stream import AudioPiped
 
-@Client.on_message(filters.command(['playfrom'], prefixes=f"{HNDLR}"))
+@Client.on_message(contact_filter & filters.command(['playfrom'], prefixes=f"{HNDLR}"))
 async def playfrom(client, m: Message):
    chat_id = m.chat.id
    if len(m.command) < 2:
