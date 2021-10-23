@@ -10,6 +10,7 @@ if os.path.exists(".env"):
 # Necessary Vars
 API_ID = int(os.getenv("API_ID", "6"))
 API_HASH = os.getenv("API_HASH", "eb06d4abfb49dc3eeb1aeb98ae0f581e")
+OWNER_ID = int(os.getenv("OWNER_ID", "10"))
 SESSION = os.getenv("SESSION")
 HNDLR = os.getenv("HNDLR", "!")
 
