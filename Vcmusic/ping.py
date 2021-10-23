@@ -29,7 +29,6 @@ async def _human_time_duration(seconds):
                          .format(amount, unit, "" if amount == 1 else "s"))
     return ', '.join(parts)
 
-
 @Client.on_message(filters.user(OWNER_ID) & filters.command(['ping'], prefixes=f"{HNDLR}"))
 async def ping(client, m: Message):
    start = time()
@@ -77,11 +76,11 @@ async def pong(client, m: Message):
    uptime_sec = (current_time - START_TIME).total_seconds()
    uptime = await _human_time_duration(int(uptime_sec))
    await pong.edit(
-       f"**KONTOL!! **\n✨ **NGENTOT** : {delta_ping * 1000:.3f} ms\n**⏱️ Bot Uptime** : {uptime}")
+       f"**KONTOL!!**\n✨ **NGENTOT** : `{delta_ping * 1000:.3f} ms`\n**⏱️ Bot Uptime** : `{uptime}`")
 
 @Client.on_message(filters.user(OWNER_ID) & filters.command(['help'], prefixes=f"{HNDLR}"))
 async def help(client, m: Message):
-   HELP = f"**💡 Help menu** \n\n📚 __All Commands__ : \n• `{HNDLR}play` \n• `{HNDLR}vplay` \n• `{HNDLR}stream` (For Radio links) \n• `{HNDLR}vstream` (For .m3u8 / live links) \n• `{HNDLR}playfrom [channel] ; [n]` - Plays last n songs from channel \n• `{HNDLR}playlist` / `{HNDLR}queue` \n• `{HNDLR}repo \n• `{HNDLR}ping` \n• `{HNDLR}skip` \n• `{HNDLR}pause` and `{HNDLR}resume` \n• `{HNDLR}stop` / `{HNDLR}end` \n• `{HNDLR}help`\n\n📝 Notes: Your contacts is sudo users, can control your userbot musicplayer"
+   HELP = f"**💡 Help menu**\n\n📚 __All Commands__ : \n• `{HNDLR}play` \n• `{HNDLR}vplay` \n• `{HNDLR}stream` (For Radio links) \n• `{HNDLR}vstream` (For .m3u8 / live links) \n• `{HNDLR}playfrom [channel] ; [n]` - Plays last n songs from channel \n• `{HNDLR}playlist` / `{HNDLR}queue` \n• `{HNDLR}repo` \n• `{HNDLR}ping` \n• `{HNDLR}skip` \n• `{HNDLR}pause` and `{HNDLR}resume` \n• `{HNDLR}stop` / `{HNDLR}end` \n• `{HNDLR}help`\n\n📝 Notes: Your contacts is sudo users, can control your userbot musicplayer"
    await m.edit(HELP)
 
 @Client.on_message(filters.user(OWNER_ID) & filters.command(['repo'], prefixes=f"{HNDLR}"))
