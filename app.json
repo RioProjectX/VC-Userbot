@@ -21,6 +21,10 @@
             "description": "get it from my.telegram.org",
             "required": true
         },
+        "OWNER_ID": {
+            "description": "Your ID",
+            "required": true
+        },
         "HNDLR": {
             "description": "Your handler for play etc. The default handler is (!)",
             "value": "!",
