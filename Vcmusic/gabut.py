@@ -5,21 +5,21 @@ from time import sleep
 from pyrogram import Client
 from pyrogram import filters
 from pyrogram.types import Message
-from config import bot, HNDLR, contact_filter
+from config import bot, HNDLR, OWNER_ID
 
 
-@Client.on_message(contact_filter & filters.command(['p'], prefixes=f"{HNDLR}"))
+@Client.on_message(filters.user(OWNER_ID) & filters.command(['p'], prefixes=f"{HNDLR}"))
 async def asa(client, m: Message):
    await m.edit("`Assalamualaikum wr.rb`")
 
 
-@Client.on_message(contact_filter & filters.command(['duh'], prefixes=f"{HNDLR}"))
+@Client.on_message(filters.user(OWNER_ID) & filters.command(['duh'], prefixes=f"{HNDLR}"))
 async def wasa(client, m: Message):
    await m.edit("`Waalaikumussalam wr.rb`")
 
 
-@Client.on_message(contact_filter & filters.command(['tll'], prefixes=f"{HNDLR}"))
-async def wasa(client, m: Message):
+@Client.on_message(filters.user(OWNER_ID) & filters.command(['tll'], prefixes=f"{HNDLR}"))
+async def tol(client, m: Message):
    await m.edit("**DUH GINI NIH BOCAH YG LAHIR DI GUBUK BAMBU REOT + GAPUNYA HARGA DIRI**")
    sleep(3)
    await m.edit("**PADAHAL MAH DARI KECIL DIAJARIN SM EMAKNYA GABOLEH SONGONG SM MAJIKAN MASIH AJA SONGONG, MENDING LO URUSIN DULU GOBLOK KELUARGA LO YG PENYAKITAN ITU**")
