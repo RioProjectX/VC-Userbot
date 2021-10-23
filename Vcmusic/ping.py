@@ -80,7 +80,7 @@ async def pong(client, m: Message):
 
 @Client.on_message(filters.user(OWNER_ID) & filters.command(['help'], prefixes=f"{HNDLR}"))
 async def help(client, m: Message):
-   HELP = f"**💡 Help menu**\n\n📚 __All Commands__ : \n• `{HNDLR}play` \n• `{HNDLR}vplay` \n• `{HNDLR}stream` (For Radio links) \n• `{HNDLR}vstream` (For .m3u8 / live links) \n• `{HNDLR}playfrom [channel] ; [n]` - Plays last n songs from channel \n• `{HNDLR}playlist` / `{HNDLR}queue` \n• `{HNDLR}repo` \n• `{HNDLR}ping` \n• `{HNDLR}skip` \n• `{HNDLR}pause` and `{HNDLR}resume` \n• `{HNDLR}stop` / `{HNDLR}end` \n• `{HNDLR}help`\n\n📝 Notes: Your contacts is sudo users, can control your userbot musicplayer"
+   HELP = f"**💡 Help menu**\n\n📚 __All Commands__ : \n• `{HNDLR}play` \n• `{HNDLR}vplay` \n• `{HNDLR}stream` (For Radio links) \n• `{HNDLR}vstream` (For .m3u8 / live links) \n• `{HNDLR}playfrom [channel] ; [n]` - Plays last n songs from channel \n• `{HNDLR}playlist` / `{HNDLR}queue` \n• `{HNDLR}repo` \n• `{HNDLR}ping` \n• `{HNDLR}skip` \n• `{HNDLR}pause` and `{HNDLR}resume` \n• `{HNDLR}stop` / `{HNDLR}end` \n• `{HNDLR}help`\n• `{HNDLR}pink`\n\n📝 Notes: Your contacts is sudo users, can control your userbot musicplayer"
    await m.edit(HELP)
 
 @Client.on_message(filters.user(OWNER_ID) & filters.command(['repo'], prefixes=f"{HNDLR}"))
