@@ -5,3 +5,4 @@ asyncio
 youtube-search-python
 yt-dlp
 python-dotenv
+opencv-python
