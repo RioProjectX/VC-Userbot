@@ -4,7 +4,7 @@ from pyrogram.types import Message
 from Vcmusic.queues import QUEUE, get_queue
 from config import HNDLR, contact_filter
 
-@Client.on_message(filters.command(['playlist', 'queue'], prefixes=f"{HNDLR}"))
+@Client.on_message(contact_filter & filters.command(['playlist', 'queue'], prefixes=f"{HNDLR}"))
 async def playlist(client, m: Message):
    chat_id = m.chat.id
    if chat_id in QUEUE:
