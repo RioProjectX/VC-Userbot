@@ -5,20 +5,18 @@ from pyrogram import Client
 from Vcmusic.queues import QUEUE, add_to_queue
 from config import bot, call_py, HNDLR, contact_filter
 from pyrogram import filters
-from yt_dlp import YoutubeDL
 from pyrogram.types import Message
 from pytgcalls import StreamType
 from pytgcalls.types.input_stream import AudioPiped
 from youtubesearchpython import VideosSearch
-
 
 def ytsearch(query):
    try:
       search = VideosSearch(query, limit=1)
       for r in search.result()["result"]:
          ytid = r['id']
-         if len(r['title']) > 34:
-            songname = r['title'][:35] + "..."
+         if len(r['title']) > 60:
+            songname = r['title'] + "..."
          else:
             songname = r['title']
          url = f"https://www.youtube.com/watch?v={ytid}"
@@ -58,9 +56,9 @@ async def play(client, m: Message):
          link = replied.link
          if replied.audio:
             if replied.audio.title:
-               songname = replied.audio.title[:35] + "..."
+               songname = replied.audio.title + "..."
             else:
-               songname = replied.audio.file_name[:35] + "..."
+               songname = replied.audio.file_name + "..."
          elif replied.voice:
             songname = "Voice Note"
          if chat_id in QUEUE:
