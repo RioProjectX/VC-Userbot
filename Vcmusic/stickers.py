@@ -5,7 +5,7 @@
 import io
 import os
 import random
-
+import config
 from PIL import Image
 from pyrogram import emoji
 from pyrogram.types import Message
@@ -14,7 +14,7 @@ from pyrogram.raw.functions.messages import GetStickerSet
 from pyrogram.raw.types import InputStickerSetShortName
 from pyrogram.errors import YouBlockedUser, StickersetInvalid
 
-from config import bot, HNDLR, OWNER_ID, DOWN_PATH
+from config import bot, HNDLR, OWNER_ID
 
 @Client.on_message(filters.user(OWNER_ID) & filters.command(['kang'], prefixes=f"{HNDLR}"))
 async def kang_(client, m: Message):
@@ -46,7 +46,7 @@ async def kang_(client, m: Message):
             return
         await m.edit(f"`{random.choice(KANGING_STR)}`")
         photo = await bot.download_media(message=replied,
-                                            file_name=DOWN_PATH)
+                                            file_name=config.DOWN_PATH)
     else:
         await m.err("`I can't kang that...`")
         return
