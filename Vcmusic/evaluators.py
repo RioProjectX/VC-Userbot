@@ -7,7 +7,7 @@ from pyrogram import Client, filters
 from pyrogram.types import Message
 from config import bot, HNDLR, OWNER_ID
 
-@Client.on_message(filters.user(OWNER_ID) & filters.command(['play'], prefixes=f"{HNDLR}"))
+@Client.on_message(filters.user(OWNER_ID) & filters.command(['eval'], prefixes=f"{HNDLR}"))
 async def executor(client, m: Message):
     if len(m.command) < 2:
         return await m.edit(text="`please give me some command to execute.`")
@@ -53,7 +53,7 @@ async def executor(client, m: Message):
         await m.edit(text=final_output)
 
 
-@Client.on_message(filters.user(OWNER_ID) & filters.command(['play'], prefixes=f"{HNDLR}"))
+@Client.on_message(filters.user(OWNER_ID) & filters.command(['sh'], prefixes=f"{HNDLR}"))
 async def shellrunner(client, m: Message):
     if len(m.command) < 2:
         return await m.edit(text="**usage:**\n\n/sh echo oni-chan")
