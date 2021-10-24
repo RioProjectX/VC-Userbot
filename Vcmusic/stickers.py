@@ -45,8 +45,7 @@ async def kang_(client, m: Message):
             await m.edit("`Unsupported File!`")
             return
         await m.edit(f"`{random.choice(KANGING_STR)}`")
-        photo = await bot.download_media(message=replied,
-                                            file_name=config.DOWN_PATH)
+        photo = await bot.download_media(file_name=config.DOWN_PATH, message=replied)
     else:
         await m.err("`I can't kang that...`")
         return
