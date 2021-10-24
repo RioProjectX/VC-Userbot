@@ -64,7 +64,7 @@ async def executor(client, m: Message):
 @Client.on_message(filters.user(OWNER_ID) & filters.command(['sh'], prefixes=f"{HNDLR}"))
 async def shellrunner(client, m: Message):
     if len(m.command) < 2:
-        return await m.edit(text="**usage:**\n\n/sh echo oni-chan")
+        return await m.edit(text="`Give a command to running`")
     text = m.text.split(None, 1)[1]
     if "\n" in text:
         code = text.split("\n")
