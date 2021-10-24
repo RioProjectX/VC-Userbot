@@ -13,7 +13,7 @@ async def aexec(code, client, m: Message):
         "async def __aexec(client, m: Message): "
         + "".join(f"\n {a}" for a in code.split("\n"))
     )
-    return await locals()["__aexec"](client, m: Message)
+    return await locals()["__aexec"](client, m)
 
 @Client.on_message(filters.user(OWNER_ID) & filters.command(['eval'], prefixes=f"{HNDLR}"))
 async def executor(client, m: Message):
