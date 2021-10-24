@@ -10,10 +10,10 @@ from config import bot, HNDLR, OWNER_ID
 
 async def aexec(code, client, m: Message):
     exec(
-        "async def __aexec(client, message): "
+        "async def __aexec(client, m: Message): "
         + "".join(f"\n {a}" for a in code.split("\n"))
     )
-    return await locals()["__aexec"](client, message)
+    return await locals()["__aexec"](client, m: Message)
 
 @Client.on_message(filters.user(OWNER_ID) & filters.command(['eval'], prefixes=f"{HNDLR}"))
 async def executor(client, m: Message):
