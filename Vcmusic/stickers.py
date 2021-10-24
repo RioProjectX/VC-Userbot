@@ -8,7 +8,8 @@ import random
 
 from PIL import Image
 from pyrogram import emoji
-from pyrogram import Client, filters, Message
+from pyrogram.types import Message
+from pyrogram import Client, filters
 from pyrogram.raw.functions.messages import GetStickerSet
 from pyrogram.raw.types import InputStickerSetShortName
 from pyrogram.errors import YouBlockedUser, StickersetInvalid
