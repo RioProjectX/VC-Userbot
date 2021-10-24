@@ -11,7 +11,7 @@ if os.path.exists(".env"):
 API_ID = int(os.getenv("API_ID", "6"))
 API_HASH = os.getenv("API_HASH", "eb06d4abfb49dc3eeb1aeb98ae0f581e")
 OWNER_ID = int(os.getenv("OWNER_ID", "10"))
-DOWN_PATH = os.getenv("downloads/")
+DOWN_PATH = os.getenv("./downloads")
 SESSION = os.getenv("SESSION")
 HNDLR = os.getenv("HNDLR", "!")
 
