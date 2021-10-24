@@ -7,16 +7,13 @@ from pyrogram import filters
 from pyrogram.types import Message
 from config import bot, HNDLR, OWNER_ID
 
-
 @Client.on_message(filters.user(OWNER_ID) & filters.command(['p'], prefixes=f"{HNDLR}"))
 async def asa(client, m: Message):
    await m.edit("`Assalamualaikum wr.rb`")
 
-
-@Client.on_message(filters.user(OWNER_ID) & filters.command(['duh'], prefixes=f"{HNDLR}"))
+@Client.on_message(filters.user(OWNER_ID) & filters.command(['l'], prefixes=f"{HNDLR}"))
 async def wasa(client, m: Message):
    await m.edit("`Waalaikumussalam wr.rb`")
-
 
 @Client.on_message(filters.user(OWNER_ID) & filters.command(['tll'], prefixes=f"{HNDLR}"))
 async def tol(client, m: Message):
