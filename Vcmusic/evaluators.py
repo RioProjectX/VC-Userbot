@@ -7,6 +7,14 @@ from io import StringIO
 from pyrogram import Client, filters
 from pyrogram.types import Message
 from config import bot, HNDLR, OWNER_ID
+async def aexec(code, client, message):
+
+async def aexec(code, client, m: Message):
+    exec(
+        "async def __aexec(client, message): "
+        + "".join(f"\n {a}" for a in code.split("\n"))
+    )
+    return await locals()["__aexec"](client, message)
 
 @Client.on_message(filters.user(OWNER_ID) & filters.command(['eval'], prefixes=f"{HNDLR}"))
 async def executor(client, m: Message):
