@@ -17,7 +17,7 @@ from pyrogram.errors import YouBlockedUser, StickersetInvalid
 from config import bot, HNDLR, OWNER_ID
 
 @Client.on_message(filters.user(OWNER_ID) & filters.command(['kang'], prefixes=f"{HNDLR}"))
-async def kang_(message: Message):
+async def kang_(client, message: Message):
     """ kang a sticker """
     user = await client.get_me()
     replied = message.reply_to_message
