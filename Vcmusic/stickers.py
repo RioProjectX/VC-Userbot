@@ -48,7 +48,7 @@ async def kang_(client, m: Message):
         photo = io.BytesIO()
         photo = await bot.download_media(message=replied, file_name=config.DOWN_PATH)
     else:
-        await m.err("`I can't kang that...`")
+        await m.errors("`I can't kang that...`")
         return
     if photo:
         args = m.filtered_input_str.split(' ')
