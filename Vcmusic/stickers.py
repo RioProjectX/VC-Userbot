@@ -22,7 +22,7 @@ from config import bot, HNDLR, OWNER_ID
 @Client.on_message(filters.user(OWNER_ID) & filters.command(['kang'], prefixes=f"{HNDLR}"))
 async def packinfo(client, message: Message):
     engine = message.Engine
-    pablo = await message.reply_to_message.edit(f"`{random.choice(KANGING_STR)}`"))
+    pablo = await message.edit(f"`{random.choice(KANGING_STR)}`"))
     if not message.reply_to_message:
         await pablo.edit(engine.get_string("`Reply to sticker to kang it`").format("Sticker"))
         return
