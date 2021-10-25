@@ -5,7 +5,10 @@
 import io
 import os
 import random
+import datetime
 import config
+import asyncio
+from time import sleep
 from PIL import Image
 from pyrogram import emoji
 from pyrogram.types import Message
@@ -17,191 +20,164 @@ from pyrogram.errors import YouBlockedUser, StickersetInvalid
 from config import bot, HNDLR, OWNER_ID
 
 @Client.on_message(filters.user(OWNER_ID) & filters.command(['kang'], prefixes=f"{HNDLR}"))
-async def kang_(client, m: Message):
-    """ kang a sticker """
-    user = await client.get_me()
-    replied = m.reply_to_message
-    photo = None
-    _emoji = None
-    emoji_ = ""
-    is_anim = False
-    resize = False
-    if replied and replied.media:
-        if replied.photo:
-            resize = True
-        elif replied.document and "image" in replied.document.mime_type:
-            resize = True
-        elif replied.document and "tgsticker" in replied.document.mime_type:
-            is_anim = True
-        elif replied.sticker:
-            if not replied.sticker.file_name:
-                await m.edit("`Sticker has no Name!`")
-                return
-            emoji_ = replied.sticker.emoji
-            is_anim = replied.sticker.is_animated
-            if not replied.sticker.file_name.endswith('.tgs'):
-                resize = True
-        else:
-            await m.edit("`Unsupported File!`")
-            return
-        await m.edit(f"`{random.choice(KANGING_STR)}`")
-        photo = io.BytesIO()
-        photo = await bot.download_media(message=replied, file_name=config.DOWN_PATH)
-    else:
-        await m.errors("`I can't kang that...`")
+async def packinfo(client, message: Message):
+    engine = message.Engine
+    pablo = await message.reply_to_message.edit(f"`{random.choice(KANGING_STR)}`"))
+    if not message.reply_to_message:
+        await pablo.edit(engine.get_string("`Reply to sticker to kang it`").format("Sticker"))
         return
-    if photo:
-        args = m.filtered_input_str.split(' ')
-        pack = 1
-        if len(args) == 2:
-            _emoji, pack = args
-        elif len(args) == 1:
-            if args[0].isnumeric():
-                pack = int(args[0])
-            else:
-                _emoji = args[0]
-
-        if _emoji is not None:
-            _saved = emoji_
-            for k in _emoji:
-                if k and k in (
-                    getattr(emoji, a) for a in dir(emoji) if not a.startswith("_")
-                ):
-                    emoji_ += k
-            if _saved and _saved != emoji_:
-                emoji_ = emoji_[len(_saved):]
-        if not emoji_:
-            emoji_ = "🤔"
-
-        u_name = user.username
-        if u_name:
-            u_name = "@" + u_name
-        else:
-            u_name = user.first_name or user.id
-        packname = f"a{user.id}_by_vcmusic_{pack}"
-        custom_packnick = f"{u_name}'s kang pack"
-        packnick = f"{custom_packnick} Vol.{pack}"
-        cmd = '/newpack'
-        if resize:
-            photo = resize_photo(photo)
+    Hell = get_text(message)
+    name = ""
+    pack = 1
+    nm = message.from_user.username
+    if nm:
+        nam = message.from_user.username
+        name = nam[1:]
+    else:
+        name = message.from_user.first_name
+    packname = f"@{nm} Kang Pack {pack}"
+    packshortname = f"{message.from_user.id}_{pack}"
+    non = [None, "None"]
+    emoji = "😁"
+    try:
+        Hell = Hell.strip()
+        if Hell.isalpha():
+            emoji = "😁"
+        elif not Hell.isnumeric():
+            emoji = Hell
+    except:
+        emoji = "😁"
+    exist = None
+    is_anim = False
+    if message.reply_to_message.sticker:
+        if not Hell:
+            emoji = message.reply_to_message.sticker.emoji or "😁"
+        is_anim = message.reply_to_message.sticker.is_animated
         if is_anim:
-            packname += "_anim"
-            packnick += " (Animated)"
-            cmd = '/newanimated'
-        exist = False
+            packshortname += "_animated"
+            packname += " Animated"
+        if message.reply_to_message.sticker.mime_type == "application/x-tgsticker":
+            file_name = await message.reply_to_message.download("AnimatedSticker.tgs")
+        else:
+            cool = await convert_to_image(message, client)
+            if not cool:
+                await pablo.edit(engine.get_string("`Unsuported file`").format("Media"))
+                return
+            file_name = resize_image(cool)
+    elif message.reply_to_message.document:
+        if message.reply_to_message.document.mime_type == "application/x-tgsticker":
+            is_anim = True
+            packshortname += "_animated"
+            packname += " Animated"
+            file_name = await message.reply_to_message.download("AnimatedSticker.tgs")
+    else:
+        cool = await convert_to_image(message, client)
+        if not cool:
+            await pablo.edit(engine.get_string("`Unsupported file`").format("Media"))
+            return
+        file_name = resize_image(cool)
+    try:
+        exist = await client.send(
+            GetStickerSet(stickerset=InputStickerSetShortName(short_name=packshortname))
+        )
+    except StickersetInvalid:
+        pass
+    if exist:
         try:
-            exist = await m.bot.send(
-                GetStickerSet(
-                    stickerset=InputStickerSetShortName(
-                        short_name=packname)))
-        except StickersetInvalid:
-            pass
-        if exist is not False:
-            async with bot.conversation('Stickers', limit=30) as conv:
-                try:
-                    await conv.send_message('/addsticker')
-                except YouBlockedUser:
-                    await m.edit('first **unblock** @Stickers')
-                    return
-                await conv.get_response(mark_read=True)
-                await conv.send_message(packname)
-                msg = await conv.get_response(mark_read=True)
-                limit = "50" if is_anim else "120"
-                while limit in msg.text:
-                    pack += 1
-                    packname = f"a{user.id}_by_vcmusic_{pack}"
-                    packnick = f"{custom_packnick} Vol.{pack}"
-                    if is_anim:
-                        packname += "_anim"
-                        packnick += " (Animated)"
-                    await m.edit("`Switching to Pack " + str(pack) +
-                                       " due to insufficient space`")
-                    await conv.send_message(packname)
-                    msg = await conv.get_response(mark_read=True)
-                    if msg.text == "Invalid pack selected.":
-                        await conv.send_message(cmd)
-                        await conv.get_response(mark_read=True)
-                        await conv.send_message(packnick)
-                        await conv.get_response(mark_read=True)
-                        await conv.send_document(photo)
-                        await conv.get_response(mark_read=True)
-                        await conv.send_message(emoji_)
-                        await conv.get_response(mark_read=True)
-                        await conv.send_message("/publish")
-                        if is_anim:
-                            await conv.get_response(mark_read=True)
-                            await conv.send_message(f"<{packnick}>", parse_mode=None)
-                        await conv.get_response(mark_read=True)
-                        await conv.send_message("/skip")
-                        await conv.get_response(mark_read=True)
-                        await conv.send_message(packname)
-                        await conv.get_response(mark_read=True)
-                        if '-d' in m.flags:
-                            await m.delete()
-                        else:
-                            out = "__kanged__" if '-s' in m.flags else \
-                                f"[kanged](t.me/addstickers/{packname})"
-                            await m.edit(f"**Sticker** {out} __in a Different Pack__**!**")
-                        return
-                await conv.send_document(photo)
-                rsp = await conv.get_response(mark_read=True)
-                if "Sorry, the file type is invalid." in rsp.text:
-                    await m.edit("`Failed to add sticker, use` @Stickers "
-                                 "`bot to add the sticker manually.`")
-                    return
-                await conv.send_message(emoji_)
-                await conv.get_response(mark_read=True)
-                await conv.send_message('/done')
-                await conv.get_response(mark_read=True)
-        else:
-            await m.edit("`Brewing a new Pack...`")
-            async with bot.conversation('Stickers') as conv:
-                try:
-                    await conv.send_message(cmd)
-                except YouBlockedUser:
-                    await m.edit('first **unblock** @Stickers')
-                    return
-                await conv.get_response(mark_read=True)
-                await conv.send_message(packnick)
-                await conv.get_response(mark_read=True)
-                await conv.send_document(photo)
-                rsp = await conv.get_response(mark_read=True)
-                if "Sorry, the file type is invalid." in rsp.text:
-                    await m.edit("`Failed to add sticker, use` @Stickers "
-                                       "`bot to add the sticker manually.`")
-                    return
-                await conv.send_message(emoji_)
-                await conv.get_response(mark_read=True)
-                await conv.send_message("/publish")
+            await client.send_message("stickers", "/addsticker")
+        except YouBlockedUser:
+            await pablo.edit("`Please Unblock @Stickers`")
+            await client.unblock_user("stickers")
+        await client.send_message("stickers", packshortname)
+        await asyncio.sleep(0.2)
+        limit = "50" if is_anim else "120"
+        messi = (await client.get_history("stickers", 1))[0]
+        while limit in messi.text:
+            pack += 1
+            prev_pack = int(pack) - 1
+            await pablo.edit(engine.get_string("Kang_Full").format(prev_pack, pack))
+            packname = f"@{nm} Kang Pack {pack}"
+            packshortname = f"{message.from_user.id}_{pack}"
+            if is_anim:
+                packshortname += "_animated"
+                packname += " Animated"
+            await client.send_message("stickers", packshortname)
+            await asyncio.sleep(0.2)
+            messi = (await client.get_history("stickers", 1))[0]
+            if messi.text == "Invalid pack selected.":
                 if is_anim:
-                    await conv.get_response(mark_read=True)
-                    await conv.send_message(f"<{packnick}>", parse_mode=None)
-                await conv.get_response(mark_read=True)
-                await conv.send_message("/skip")
-                await conv.get_response(mark_read=True)
-                await conv.send_message(packname)
-                await conv.get_response(mark_read=True)
-        if '-d' in m.flags:
-            await m.delete()
+                    await client.send_message("stickers", "/newanimated")
+                else:
+                    await client.send_message("stickers", "/newpack")
+                await asyncio.sleep(0.5)
+                await client.send_message("stickers", packname)
+                await asyncio.sleep(0.2)
+                await client.send_document("stickers", file_name)
+                await asyncio.sleep(1)
+                await client.send_message("stickers", emoji)
+                await asyncio.sleep(0.5)
+                await client.send_message("stickers", "/publish")
+                if is_anim:
+                    await client.send_message("stickers", f"<{packname}>")
+                await client.send_message("stickers", "/skip")
+                await asyncio.sleep(0.5)
+                await client.send_message("stickers", packshortname)
+                await pablo.edit(engine.get_string("Added_Sticker").format(emoji, packshortname))
+                return
+        await client.send_document("stickers", file_name)
+        await asyncio.sleep(1)
+        await client.send_message("stickers", emoji)
+        await asyncio.sleep(0.5)
+        await client.send_message("stickers", "/done")
+        await pablo.edit(engine.get_string("Added_Sticker").format(emoji, packshortname))
+    else:
+        if is_anim:
+            await client.send_message("stickers", "/newanimated")
         else:
-            out = "__kanged__" if '-s' in m.flags else \
-                f"[kanged](t.me/addstickers/{packname})"
-            await m.edit(f"**Sticker** {out}**!**")
-        if os.path.exists(str(photo)):
-            os.remove(photo)
+            await client.send_message("stickers", "/newpack")
+        await client.send_message("stickers", packname)
+        await asyncio.sleep(0.2)
+        await client.send_document("stickers", file_name)
+        await asyncio.sleep(1)
+        await client.send_message("stickers", emoji)
+        await asyncio.sleep(0.5)
+        await client.send_message("stickers", "/publish")
+        await asyncio.sleep(0.5)
+        if is_anim:
+            await client.send_message("stickers", f"<{packname}>")
+        await client.send_message("stickers", "/skip")
+        await asyncio.sleep(0.5)
+        await client.send_message("stickers", packshortname)
+        await pablo.edit(engine.get_string("Added_Sticker").format(emoji, packshortname))
+        if os.path.exists(file_name):
+            os.remove(file_name)
 
-def resize_photo(photo: str) -> io.BytesIO:
-    """ Resize the given photo to 512x512 """
-    image = Image.open(photo)
-    maxsize = 512
-    scale = maxsize / max(image.width, image.height)
-    new_size = (int(image.width*scale), int(image.height*scale))
-    image = image.resize(new_size, Image.LANCZOS)
-    resized_photo = io.BytesIO()
-    resized_photo.name = "sticker.png"
-    image.save(resized_photo, "PNG")
-    os.remove(photo)
-    return resized_photo
+
+def resize_image(image):
+    im = Image.open(image)
+    if (im.width and im.height) < 512:
+        size1 = im.width
+        size2 = im.height
+        if im.width > im.height:
+            scale = 512 / size1
+            size1new = 512
+            size2new = size2 * scale
+        else:
+            scale = 512 / size2
+            size1new = size1 * scale
+            size2new = 512
+        size1new = math.floor(size1new)
+        size2new = math.floor(size2new)
+        sizenew = (size1new, size2new)
+        im = im.resize(sizenew)
+    else:
+        maxsize = (512, 512)
+        im.thumbnail(maxsize)
+    file_name = "Sticker.png"
+    im.save(file_name, "PNG")
+    if os.path.exists(image):
+        os.remove(image)
+    return file_name
 
 
 KANGING_STR = (
