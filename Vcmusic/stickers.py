@@ -45,7 +45,8 @@ async def kang_(client, m: Message):
             await m.edit("`Unsupported File!`")
             return
         await m.edit(f"`{random.choice(KANGING_STR)}`")
-        photo = await bot.download_media(file_name=config.DOWN_PATH, message=replied)
+        photo = io.BytesIO()
+        photo = await bot.download_media(message=replied, file_name=config.DOWN_PATH)
     else:
         await m.err("`I can't kang that...`")
         return
@@ -77,7 +78,7 @@ async def kang_(client, m: Message):
             u_name = "@" + u_name
         else:
             u_name = user.first_name or user.id
-        packname = f"a{user.id}_by_userge_{pack}"
+        packname = f"a{user.id}_by_vcmusic_{pack}"
         custom_packnick = f"{u_name}'s kang pack"
         packnick = f"{custom_packnick} Vol.{pack}"
         cmd = '/newpack'
@@ -108,7 +109,7 @@ async def kang_(client, m: Message):
                 limit = "50" if is_anim else "120"
                 while limit in msg.text:
                     pack += 1
-                    packname = f"a{user.id}_by_userge_{pack}"
+                    packname = f"a{user.id}_by_vcmusic_{pack}"
                     packnick = f"{custom_packnick} Vol.{pack}"
                     if is_anim:
                         packname += "_anim"
