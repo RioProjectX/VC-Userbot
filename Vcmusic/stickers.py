@@ -5,7 +5,6 @@
 import io
 import os
 import random
-import config
 from PIL import Image
 from pyrogram import emoji
 from pyrogram.types import Message
@@ -46,7 +45,7 @@ async def kang_(client, message: Message):
             return
         await message.edit(f"`{random.choice(KANGING_STR)}`")
         photo = await client.download_media(message=replied,
-                                            file_name=config.DOWN_PATH)
+                                            file_name=DOWN_PATH)
     else:
         await message.err("`I can't kang that...`")
         return
