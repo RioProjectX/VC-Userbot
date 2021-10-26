@@ -4,9 +4,11 @@ from pytgcalls import PyTgCalls
 from pytgcalls import idle as pyidle
 from config import bot, call_py
 
-bot.start()
 print("The Userbot Started")
-call_py.start()
+bot.start()
+
 print("Vcmusic Client Started")
+call_py.start()
+
 pyidle()
 idle()
