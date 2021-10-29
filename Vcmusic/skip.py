@@ -11,11 +11,11 @@ async def skip(client, m: Message):
    if len(m.command) < 2:
       op = await skip_current_song(chat_id)
       if op==0:
-         await m.reply("❌ **Nothing Is Playing**")
+         await m.reply("❌ **Tidak Sedang Memutar**")
       elif op==1:
-         await m.reply("❌ The queue is Empty, leaving Voice Chat now...")
+         await m.reply("❌ Tidak Ada Antrian Untuk Di Skip, Meninggalkan Voice Chat Sekarang...")
       else:
-         await m.reply(f"**Skipped ⏭** \n**🎧 Now Playing** - [{op[0]}]({op[1]}) | `{op[2]}`", disable_web_page_preview=True)
+         await m.reply(f"**Skipped ⏭** \n**🎧 Sedang Memutar** - [{op[0]}]({op[1]}) | `{op[2]}`", disable_web_page_preview=True)
    else:
       skip = m.text.split(None, 1)[1]
       OP = "**Removed the following songs from Queue:-**"
