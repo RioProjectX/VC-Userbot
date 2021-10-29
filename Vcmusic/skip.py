@@ -15,7 +15,7 @@ async def skip(client, m: Message):
       elif op==1:
          await m.reply("❌ Tidak Ada Antrian Untuk Di Skip, Meninggalkan Voice Chat Sekarang...")
       else:
-         await m.reply(f"**Skipped ⏭** \n**🎧 Sedang Memutar** - [{op[0]}]({op[1]}) | `{op[2]}`", disable_web_page_preview=True)
+         await m.reply(f"**Melanjutkan ⏭** \n**🎧 Sedang Memutar** - [{op[0]}]({op[1]}) | `{op[2]}`", disable_web_page_preview=True)
    else:
       skip = m.text.split(None, 1)[1]
       OP = "**Removed the following songs from Queue:-**"
@@ -40,7 +40,7 @@ async def stop(client, m: Message):
       try:
          await call_py.leave_group_call(chat_id)
          clear_queue(chat_id)
-         await m.reply("**✅ Streaming ended**")
+         await m.reply("**✅ Meninggalkan Voice Chat**")
       except Exception as e:
          await m.reply(f"**ERROR** \n`{e}`")
    else:
@@ -64,7 +64,7 @@ async def resume(client, m: Message):
    if chat_id in QUEUE:
       try:
          await call_py.resume_stream(chat_id)
-         await m.reply("**Resumed Streaming ▶**")
+         await m.reply("**Melanjutkan Streaming ▶**")
       except Exception as e:
          await m.reply(f"**ERROR** \n`{e}`")
    else:
