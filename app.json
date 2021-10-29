@@ -7,7 +7,7 @@
         "Vcmusic",
         "MusicPlayer"
     ],
-    "repository": "https://github.com/KennedyProject/Vcmusic-Userbot",
+    "repository": "https://github.com/rioprojectx/Vc-Userbot",
     "env": {
         "SESSION": {
             "description": "Pyrogram String Session from replit.com",
