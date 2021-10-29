@@ -1,4 +1,4 @@
-# Vcmusic-Userbot
+# VC-Userbot
 
 A Telegram Userbot to play or streaming Audio and Video songs / files in Telegram Voice Chats.
 
@@ -31,7 +31,7 @@ sudo apt-get install git ffmpeg -y
 
 3) Cloning the Repo
 bash
-git clone https://github.com/KennedyProject/Vcmusic-Userbot
+git clone https://github.com/rioProjectx/Vc-Userbot
 cd Vcmusic-Userbot
 
 
@@ -62,6 +62,6 @@ python3 main.py
 
 
 ## Credits 💭
-- [KennedyProject](https://github.com/KennedyProject) The Owner
+- [KennedyProject](https://github.com/KennedyProject)
 - [Dan](https://github.com/delivrance) for [Pyrogram](https://github.com/pyrogram/pyrogram)
 - [Laky](https://github.com/Laky-64) for [PyTgCalls](https://github.com/pytgcalls/pytgcalls)
