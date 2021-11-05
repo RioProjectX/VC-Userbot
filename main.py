@@ -7,7 +7,7 @@ from config import bot, call_py
 print("The Userbot Started")
 bot.start()
 
-print("Vcmusic Client Started")
+print("VC Music Client Started")
 call_py.start()
 
 pyidle()
