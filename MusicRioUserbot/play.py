@@ -14,7 +14,7 @@ from pytgcalls.types.input_stream.quality import (
 from youtubesearchpython import VideosSearch
 
 from config import HNDLR, bot, call_py
-from MusicUserbot.helpers.queues import QUEUE, add_to_queue, get_queue
+from MusicRioUserbot.helpers.queues import QUEUE, add_to_queue, get_queue
 
 AMBILFOTO = [
     "https://telegra.ph/file/81cb39831b7fa309b56bb.jpg",
