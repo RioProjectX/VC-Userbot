@@ -24,6 +24,6 @@ contact_filter = filters.create(
 bot = Client(SESSION, API_ID, API_HASH, plugins=dict(root="MusicRioUserbot"))
 call_py = PyTgCalls(bot)
 # © 2022 GitHub, Inc.
-Terms
-Privacy
-Security
+# Terms
+# Privacy
+# Security
