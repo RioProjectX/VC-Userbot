@@ -1,7 +1,7 @@
 from random import randint
 from pyrogram import Client, filters
 from config import HNDLR, bot as USER
-from MusicUserbot.helpers.decorators import authorized_users_only
+from MusicRioUserbot.helpers.decorators import authorized_users_only
 from pyrogram.errors import UserAlreadyParticipant
 from pyrogram.raw.functions.phone import CreateGroupCall
 
