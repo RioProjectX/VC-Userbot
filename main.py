@@ -4,7 +4,7 @@ from config import call_py, bot
 
 
 async def main():
-    print("STARTING UBOT CLIENT")
+    print("STARTING RIOUBOT CLIENT")
     await bot.start()
     print("STARTING PYTGCALLS CLIENT")
     await call_py.start()
