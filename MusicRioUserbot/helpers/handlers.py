@@ -9,7 +9,7 @@ from pytgcalls.types.input_stream.quality import (
 from pytgcalls.types.stream import StreamAudioEnded, StreamVideoEnded
 
 from config import bot, call_py
-from MusicUserbot.helpers.queues import QUEUE, clear_queue, get_queue, pop_an_item
+from MusicRioUserbot.helpers.queues import QUEUE, clear_queue, get_queue, pop_an_item
 
 
 async def skip_current_song(chat_id):
