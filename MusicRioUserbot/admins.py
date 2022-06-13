@@ -1,9 +1,9 @@
 from pyrogram import Client, filters
 from pyrogram.types import Message
 from config import HNDLR, call_py
-from MusicUserbot.helpers.decorators import authorized_users_only
-from MusicUserbot.helpers.handlers import skip_current_song, skip_item
-from MusicUserbot.helpers.queues import QUEUE, clear_queue
+from MusicRioUserbot.helpers.decorators import authorized_users_only
+from MusicRioUserbot.helpers.handlers import skip_current_song, skip_item
+from MusicRioUserbot.helpers.queues import QUEUE, clear_queue
 
 
 @Client.on_message(filters.command(["skip"], prefixes=f"{HNDLR}"))
