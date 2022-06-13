@@ -1,34 +1,34 @@
 {
-    "name": "Vcmusic-Userbot",
-    "description": "A Simple Telegram Userbot to play Songs in Voice Chat",
-    "logo": "https://telegra.ph/file/1e227b2f1cac607fa6763.jpg",
+    "name": "MusicUserbot",
+    "description": "MusicUserBot Untuk Memutar Lagu Dan Video Di Obrolan Suara Telegram.",
+    "logo": "",
     "keywords": [
         "Telegram",
-        "Vcmusic",
-        "MusicPlayer"
+        "MusicPlayer",
+        "VideoPlayer"
     ],
-    "repository": "https://github.com/rioprojectx/Vc-Userbot",
+    "repository": "https://github.com/RioProjectX/VC-Userbot",
     "env": {
         "SESSION": {
-            "description": "Pyrogram String Session from replit.com",
+            "description": "Pyrogram String Session",
             "required": true
         },
         "API_ID": {
-            "description": "get it from my.telegram.org",
-            "required": true
-        },
-        "API_HASH": {
-            "description": "get it from my.telegram.org",
-            "required": true
-        },
-        "OWNER_ID": {
-            "description": "Your ID",
+            "description": "Masukan APP ID Silahkan Ambil dari my.telegram.org/apps",
             "required": true
         },
         "HNDLR": {
-            "description": "Your handler for play etc. The default handler is (!)",
-            "value": "!",
-            "required": false
+            "description": "ini akan digunakan sebagai prefix di semua perintah",
+            "required": true,
+            "value": "+"
+        },
+        "API_HASH": {
+            "description": "Masukan API HASH Silahkan Ambil dari my.telegram.org/apps",
+            "required": true
+        },
+        "SUDO_USERS": {
+            "description": "Daftar User ID pengguna dihitung sebagai admin di semua tempat (pemisah menggunakan space)",
+            "required": true
         }
     },
     "addons": [],
